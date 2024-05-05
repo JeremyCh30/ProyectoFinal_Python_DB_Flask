@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block content  %}
+    <div class="container-fluid">
+
+        <div class="d-flex justify-content-center backgroundPrincipal">
+            
+            <div class="row d-flex justify-content-around align-content-center flex-wrap align-items-center cardForm">
+
+                <!-- Formulario para enviar mensajes -->
+                <form class="col-4 text-center" id="form-mensaje" method="POST">
+                    <h1 class="d-block tituloForm">Enviar mensaje a {{ destinatario }}</h1>
+                    
+                    <div class="inputForm">
+                        <input class="inputsForm" type="text" name="mensaje" placeholder="Escribe tu mensaje...">
+                        <span class="focusInput">
+                    </div>
+                    <!-- Boton de ingreso-->
+                    <div class="pt-1">
+                        <button class="form-btn" type="submit">Enviar</button>
+                    </div>
+                    <div class="pt-3">
+                        <a class="form-btn pt-2 pb-2 text-decoration-none" href="{{ url_for('login') }}">Cerrar Sesión</a>
+                    </div>
+                </form>
+                <!-- Div para mostrar los mensajes -->
+                <div class="col-4" id="chat-mensajes">
+                    <h1 class="d-block tituloForm">Chat con {{ destinatario }}</h1>
+                    {% for mensaje in mensajes %}
+                        <div class="mensaje {{ 'remitente' if mensaje.remitente_id == current_user.id else 'destinatario' }}">{{ mensaje.mensaje }}</div>
+                    {% endfor %}
+                </div>
+
+            </div>
+
+            
+        </div>
+
+    </div>
+
+    <!-- Script para enviar mensajes mediante Ajax -->
+    <script>
+        document.getElementById("form-mensaje").addEventListener("submit", function(event) {
+            event.preventDefault();
+            var mensajeInput = document.querySelector("input[name='mensaje']");
+            var mensaje = mensajeInput.value.trim();
+            mensajeInput.value = "";
+    
+            if (mensaje !== "") {
+                fetch("{{ url_for('chat', destinatario=destinatario) }}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                        "X-CSRFToken": "{{ csrf_token }}"
+                    },
+                    body: "mensaje=" + encodeURIComponent(mensaje)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === "success") {
+                        // Actualizar la lista de mensajes
+                        var chatMensajes = document.getElementById("chat-mensajes");
+                        var nuevoMensaje = document.createElement("div");
+                        nuevoMensaje.classList.add("mensaje");
+                        nuevoMensaje.classList.add("remitente"); // Los mensajes enviados serán del remitente actual
+                        nuevoMensaje.textContent = data.remitente + ": " + mensaje; // Agregar el nombre de usuario al mensaje
+                        chatMensajes.appendChild(nuevoMensaje);
+                        chatMensajes.scrollTop = chatMensajes.scrollHeight; // Desplazar al final
+                    }
+                })
+                .catch(error => console.error("Error al enviar mensaje:", error));
+            }
+        });
+    </script>
+
+{% endblock  %}

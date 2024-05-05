@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content  %}
+    <div class="container-fluid">
+
+        <div class="d-flex justify-content-center backgroundPrincipal">
+
+            <div class="row d-flex justify-content-center align-content-center flex-wrap align-items-center cardForm">
+
+                <div class="col-6 text-center">
+                    <h1 class="d-block tituloForm">Usuarios Registrados</h1>
+                    <ul class="list-group">
+                        {% for usuario in usuarios %}
+                        <li class="mb-1 list-group-item list-group-item-light"><a class="txt3" href="{{ url_for('chat', destinatario=usuario.username) }}">{{ usuario.username }}</a></li>
+                        {% endfor %}
+                    </ul>
+                    <div class="pt-3">
+                        <a class="form-btn pt-2 pb-2 text-decoration-none" href="{{ url_for('login') }}">Cerrar Sesión</a>
+                    </div>
+                </div>
+
+                
+                    
+            </div>
+        </div>
+    </div>
+
+    
+
+{% endblock  %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content  %}
+        <div class="container-fluid">
+
+                <div class="d-flex justify-content-center backgroundPrincipal">
+
+                        <div class="row d-flex justify-content-center align-content-center flex-wrap align-items-center cardForm">
+                                <!-- Imagen Inicio-->
+                                <div class="col-4 d-none d-md-block">
+                                <img src="static/draw_svg20210507-22909-dy5ii.svg.png" alt="IMG" class="col-12">
+                                </div>
+                                <!-- Contenido-->
+                                <div class="col-md-4 text-center">
+                                        <h1 class="tituloInicio">Proyecto Final</h1>
+
+                                        <div class="text-center">
+                                                <p>
+                                                        <a class="txt1" href="{{ url_for('registro') }}">Registrase</a> o <a class="txt1" href="{{ url_for('login') }}">Iniciar sesión</a>
+                                                </p>
+                                        </div>
+                                                
+                                </div>
+                        </div>
+                </div>
+        </div>
+
+{% endblock  %}

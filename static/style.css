@@ -1,0 +1,138 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
+}
+
+.backgroundPrincipal {
+    min-height: 100vh;
+    padding: 1rem;
+    background: #9053c7;
+    background: linear-gradient(-135deg,#c850c0,#4158d0)
+}
+
+.cardForm {
+    width: 100%;
+    background: #fff;
+    border-radius: 0.625rem;
+    padding: 6.25rem 0
+}
+
+
+
+.tituloForm {
+    font-size: 1.5rem;
+    color: #333;
+    padding-bottom: 3rem
+}
+
+
+
+.inputForm {
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    margin-bottom: 10px
+}
+
+.inputsForm {
+    color: #666;
+    width: 100%;
+    background: #e6e6e6;
+    height: 3.125rem;
+    border-radius: 1.563rem;
+    padding: 0 1.875rem 0 3.75rem
+}
+
+.focusInput {
+    display: block;
+    position: absolute;
+    border-radius: 1.563rem;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 0;
+    color: rgba(87,184,70,.8)
+}
+
+.inputsForm:focus+.focusInput {
+    animation: anim-shadow .5s ease-in-out forwards
+}
+
+@keyframes anim-shadow {
+    to {
+        box-shadow: 0 0 4.375rem 1.563rem;
+        opacity: 0
+    }
+}
+
+.iconForm {
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    border-radius: 1.563rem;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding-left: 2.188rem;
+    pointer-events: none;
+    color: #666;
+    transition: all .4s
+}
+
+.inputsForm:focus+.focusInput+.iconForm {
+    color: #57b846;
+    padding-left: 1.75rem
+}
+
+.form-btn {
+    color: #fff;
+    width: 100%;
+    height: 3.125rem;
+    border-radius: 1.563rem;
+    background: #57b846;
+    padding: 0 1.563rem;
+    transition: all .4s
+}
+
+.form-btn:hover {
+    background: #333
+}
+
+.txt1 {
+    font-size: 1.25rem;
+    color: #57b846
+}
+
+.txt2 {
+    text-decoration: none;
+    font-size: 0.813rem;
+    color: #666
+}
+
+.txt3 {
+    text-decoration: none;
+    font-size: 1rem;
+    color: #666
+}
+
+a {
+    transition: all .4s;
+}
+
+a:hover {
+    color: #57b846
+}
+
+input, button {
+    outline: none;
+    border: none
+}
+
+button:hover {
+    cursor: pointer
+}
